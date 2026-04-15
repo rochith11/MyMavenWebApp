@@ -28,7 +28,7 @@ pipeline {
        
         stage('Deploy WAR') {
             steps {
-                sh 'cp /home/martin_conroy/Devops/MyMavenWebApp01/target/MyMavenWebApp.war /opt/tomcat/webapps'
+                sh 'cp target/MyMavenWebApp.war /opt/tomcat/webapps/'
             }
         }
 

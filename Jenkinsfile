@@ -1,10 +1,9 @@
 pipeline {
-    agent any  
+    agent any  // Use any available agent
 
     tools {
-        maven 'Maven'  
+        maven 'Maven'  // Ensure this matches the name configured in Jenkins
     }
-
     stages {
         stage('Checkout') {
             steps {
@@ -14,21 +13,26 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package'  // Run Maven build
             }
         }
 
-        stage('Archive') {
+        stage('Test') {
             steps {
-                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+                sh 'mvn test'  // Run unit tests
             }
         }
 
-        stage('Deploy') {
+        
+        
+       
+        stage('Deploy WAR') {
             steps {
-                sh 'mvn clean package'
+                sh 'cp target/MyMavenWebApp.war /opt/tomcat/webapps/'
             }
-        }    
+        }
+
+        
     }
 
     post {
